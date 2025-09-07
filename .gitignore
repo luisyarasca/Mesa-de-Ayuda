@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+.env.*
+
+# FastAPI / tests
+.pytest_cache/
+.coverage
+
+# Node / Vite / Vue
+frontend/node_modules/
+frontend/.vite/
+frontend/dist/
+frontend/.env
+frontend/.env.*
+
+# IDE / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Otros temporales del proyecto
+.ticket/
