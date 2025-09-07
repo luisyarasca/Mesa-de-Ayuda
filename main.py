@@ -62,11 +62,11 @@ class Ticket(Base):
         SqlEnum(
             EstadoEnum,
             name="estadoenum",
-            values_callable=lambda e: [m.value for m in e],  # <-- usa "Nuevo", "En Progreso", etc.
+            values_callable=lambda e: [m.value for m in e],  
             validate_strings=True,
-            native_enum=False,  # opcional, para MSSQL no hay enums nativos
+            native_enum=False,  # opcional
         ),
-        default=EstadoEnum.Nuevo.value,  # <-- guarda "Nuevo"
+        default=EstadoEnum.Nuevo.value, 
         nullable=False,
     )
     UsuarioID = Column(Integer, ForeignKey("usuarios.UsuarioID"))
@@ -267,7 +267,7 @@ def Eliminar_Ticket(ticket_id: int, db: Session = Depends(get_db)):
     if not ticket:
         raise HTTPException(status_code=404, detail="Ticket no encontrado")
 
-    # Fallback por si la FK en SQL Server no tiene ON DELETE CASCADE
+    # Fallback por siaca
     db.query(Comentario).filter(Comentario.TicketID == ticket_id).delete(synchronize_session=False)
 
     db.delete(ticket)
@@ -315,7 +315,7 @@ def actualizar_ticket(ticket: TicketActualizar, db: Session = Depends(get_db)):
             tecnico_final = ticket.TecnicoID if ticket.TecnicoID is not None else ticket_db.TecnicoID
             if tecnico_final is None:
                 raise HTTPException(status_code=400, detail="No puedes cerrar un ticket sin técnico asignado")
-        ticket_db.Estado = ticket.Estado  # <- AQUÍ guardamos el estado
+        ticket_db.Estado = ticket.Estado  # guarda el estado
 
     db.commit()
     db.refresh(ticket_db)

@@ -18,7 +18,7 @@ async function submit() {
   error.value = ''
   saving.value = true
   try {
-    // manda null si TecnicoID vacío
+    // manda null
     const payload = {
       Titulo: form.Titulo,
       Descripcion: form.Descripcion,

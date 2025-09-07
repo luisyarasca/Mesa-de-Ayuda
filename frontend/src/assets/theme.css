@@ -15,7 +15,7 @@
   --success:#4cd4a9;
 }
 
-/* Fondo y tipografía básica */
+
 html,body,#app{height:100%;}
 body{
   margin:0;
@@ -25,11 +25,11 @@ body{
               linear-gradient(180deg, var(--bg-1), var(--bg-2));
 }
 
-/* Layout base */
+
 .container{max-width: 1200px; margin: 2rem auto; padding: 0 16px;}
 .page{padding: 12px 0;}
 
-/* Header */
+
 .app-header{
   position: sticky; top:0; z-index: 20;
   background: color-mix(in oklab, var(--bg-2) 80%, transparent);
@@ -50,7 +50,7 @@ body{
 .nav-link:hover{ background:var(--panel); color:var(--text);}
 .nav-link.active{ background:var(--primary-2); color:#081223; font-weight:600;}
 
-/* Botones */
+
 .btn{border:1px solid var(--border); background:var(--panel); color:var(--text);
   padding:8px 10px; border-radius:10px; cursor:pointer; transition:.15s}
 .btn:hover{transform: translateY(-1px); border-color: color-mix(in oklab, var(--border), #99a 35%);}
@@ -59,7 +59,7 @@ body{
 .btn.danger{ background: color-mix(in oklab, var(--danger) 18%, var(--panel)); border-color:#7f2d2d; color:#ffd9d9;}
 .btn:disabled{opacity:.6; cursor:not-allowed}
 
-/* Inputs/selects */
+
 input, select, textarea{
   background: var(--panel);
   border:1px solid var(--border);
@@ -77,7 +77,7 @@ th,td{border-top:1px solid var(--border); padding:10px; text-align:left; vertica
 thead th{background: linear-gradient(180deg, #1a2542, #141d36); color:#cfe0ff;}
 tbody tr:hover{background: color-mix(in oklab, var(--panel-2), #fff 2%);}
 
-/* Columns helpers (usar con colgroup) */
+
 .col-id{width:60px}
 .col-title{width:240px}
 .col-desc{width:340px}
@@ -89,12 +89,12 @@ tbody tr:hover{background: color-mix(in oklab, var(--panel-2), #fff 2%);}
 .col-fecha{width:160px}
 .col-acciones{width:110px}
 
-/* Ellipsis y tooltip */
+
 .ellipsis{
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 
-/* Chips Estado */
+/* Estadooooo */
 .chip{
   display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px;
   border:1px solid transparent; font-size:.85rem; font-weight:600;
@@ -104,11 +104,11 @@ tbody tr:hover{background: color-mix(in oklab, var(--panel-2), #fff 2%);}
 .chip.progreso{ background:#053a2b; color:#69e5be; border-color:#12604d;}
 .chip.cerrado{ background:#2a2a2a; color:#e1e1e1; border-color:#404040;}
 
-/* Cards (Dashboard) */
+/* Dashboard */
 .cards{ display:grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap:14px;}
 .card{ background: var(--panel); border:1px solid var(--border); border-radius:14px; padding:14px;}
 .card h3{margin:0 0 8px 0; color:#cfe0ff}
 .card .num{font-size:2rem; font-weight:800}
 
-/* Footer */
+
 .footer{opacity:.7; color:var(--muted); text-align:center; padding:18px 0; border-top:1px solid var(--border)}

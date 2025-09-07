@@ -265,7 +265,7 @@ onMounted(async () => { await Promise.all([loadTecnicos(), loadTickets()]) })
   white-space:nowrap;
 }
 
-/* truncado a 2 líneas solo dentro del div interno */
+
 .td-title .cell,
 .td-desc  .cell{
   display:-webkit-box;
@@ -275,7 +275,7 @@ onMounted(async () => { await Promise.all([loadTecnicos(), loadTickets()]) })
   word-break:break-word;
 }
 
-/* mínimos para que no se encojan demasiado */
+/* separateeeeeeeeeee */
 .td-title { min-width:300px; }
 .td-desc  { min-width:520px; }
 
