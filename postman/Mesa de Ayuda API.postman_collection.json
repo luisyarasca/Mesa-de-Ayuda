@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "03858583-83d3-4cd2-8fc9-396dc03c105c",
+		"name": "Mesa de Ayuda API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48764754",
+		"_collection_link": "https://luisyarasca-9698394.postman.co/workspace/40c4d509-8945-4589-839a-28c666e02b0e/collection/48764754-03858583-83d3-4cd2-8fc9-396dc03c105c?action=share&source=collection_link&creator=48764754"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Crear Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/usuarios",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/usuarios/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/usuarios/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/usuarios/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tecnicos",
+			"item": [
+				{
+					"name": "Crear Tecnico",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tecnicos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tecnicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar Tecnico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tecnicos/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tecnicos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Tecnicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tecnicos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tecnicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Tecnico",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tecnicos/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tecnicos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tickets",
+			"item": [
+				{
+					"name": "Crear Ticket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tickets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tickets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar Ticket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tickets/id/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Ticket",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tickets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Ticket",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tickets/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Estadisticas Tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tickets/estadisticas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets",
+								"estadisticas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comentarios",
+			"item": [
+				{
+					"name": "Crear Comentario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tickets/1/comentarios",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets",
+								"1",
+								"comentarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Comentarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/tickets/1/comentarios",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets",
+								"1",
+								"comentarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

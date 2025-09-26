@@ -10,6 +10,7 @@ from enum import Enum
 from sqlalchemy import Enum as SqlEnum
 import pyodbc
 import os
+
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 

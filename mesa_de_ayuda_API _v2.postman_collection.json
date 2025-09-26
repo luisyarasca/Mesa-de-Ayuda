@@ -1,0 +1,299 @@
+{
+  "info": {
+    "_postman_id": "2c6c6d73-52d6-4b3f-a9c0-2d5a6e0c0abc",
+    "name": "Mesa de Ayuda - OK",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1) Crear Usuario",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Apenom\": \"Runner QA\",\n  \"Correo\": \"runner{{$timestamp}}@test.com\"\n}"
+        },
+        "url": { "raw": "{{base_url}}/usuarios", "host": ["{{base_url}}"], "path": ["usuarios"] }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Crear Usuario 200/201\", ()=> pm.expect([200,201]).to.include(pm.response.code));",
+              "const b = pm.response.json();",
+              "pm.expect(b).to.have.property('UsuarioID');",
+              "pm.environment.set('UsuarioID', b.UsuarioID);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "2) Crear Técnico",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Apenom\": \"Tec Runner {{$timestamp}}\",\n  \"Especialidad\": \"Soporte\"\n}"
+        },
+        "url": { "raw": "{{base_url}}/tecnicos", "host": ["{{base_url}}"], "path": ["tecnicos"] }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Crear Técnico 200/201\", ()=> pm.expect([200,201]).to.include(pm.response.code));",
+              "const b = pm.response.json();",
+              "pm.expect(b).to.have.property('TecnicoID');",
+              "pm.environment.set('TecnicoID', b.TecnicoID);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "3) Crear Ticket",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Titulo\": \"Ticket Runner\",\n  \"Descripcion\": \"descripcion larga runner\",\n  \"UsuarioID\": {{UsuarioID}},\n  \"TecnicoID\": {{TecnicoID}}\n}"
+        },
+        "url": { "raw": "{{base_url}}/tickets/", "host": ["{{base_url}}"], "path": ["tickets", ""] }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Crear Ticket 200/201\", ()=> pm.expect([200,201]).to.include(pm.response.code));",
+              "const b = pm.response.json();",
+              "pm.expect(b).to.have.property('TicketID');",
+              "pm.environment.set('TicketID', b.TicketID);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "4) Crear Comentario",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Contenido\": \"Se revisó el equipo\",\n  \"Autor\": \"Tec Runner\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/tickets/{{TicketID}}/comentarios",
+          "host": ["{{base_url}}"],
+          "path": ["tickets", "{{TicketID}}", "comentarios"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Crear Comentario 200/201\", ()=> pm.expect([200,201]).to.include(pm.response.code));",
+              "const b = pm.response.json();",
+              "pm.expect(b).to.have.property('ComentarioID');",
+              "pm.expect(b.TicketID).to.eql(parseInt(pm.environment.get('TicketID')));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "5) Listar Comentarios",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/tickets/{{TicketID}}/comentarios",
+          "host": ["{{base_url}}"],
+          "path": ["tickets", "{{TicketID}}", "comentarios"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Listar Comentarios 200\", ()=> pm.expect(pm.response.code).to.eql(200));",
+              "const arr = pm.response.json();",
+              "pm.expect(arr).to.be.an('array');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "6) Mostrar Ticket",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/tickets/id/{{TicketID}}",
+          "host": ["{{base_url}}"],
+          "path": ["tickets", "id", "{{TicketID}}"]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Mostrar Ticket 200\", ()=> pm.expect(pm.response.code).to.eql(200));",
+              "const b = pm.response.json();",
+              "pm.expect(b).to.have.property('TicketID');",
+              "pm.expect(b.TicketID).to.eql(parseInt(pm.environment.get('TicketID')));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "7) Actualizar Ticket (Estado=Abierto)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"TicketID\": {{TicketID}},\n  \"Estado\": \"Abierto\"\n}"
+        },
+        "url": { "raw": "{{base_url}}/tickets/", "host": ["{{base_url}}"], "path": ["tickets", ""] }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Actualizar Ticket 200\", ()=> pm.expect(pm.response.code).to.eql(200));",
+              "const b = pm.response.json();",
+              "pm.expect(b.Estado).to.eql('Abierto');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "8) Listar Tickets (paginado default)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{base_url}}/tickets", "host": ["{{base_url}}"], "path": ["tickets"] }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Listar Tickets 200\", ()=> pm.expect(pm.response.code).to.eql(200));",
+              "const arr = pm.response.json();",
+              "pm.expect(arr).to.be.an('array');"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "9) Estadísticas Tickets",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{base_url}}/tickets/estadisticas", "host": ["{{base_url}}"], "path": ["tickets", "estadisticas"] }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Estadísticas 200\", ()=> pm.expect(pm.response.code).to.eql(200));",
+              "const b = pm.response.json();",
+              "[\"Total\",\"Nuevos\",\"Abiertos\",\"En Progreso\",\"Cerrados\"].forEach(k=> pm.expect(b).to.have.property(k));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "10) Mostrar Usuario",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{base_url}}/usuarios/{{UsuarioID}}", "host": ["{{base_url}}"], "path": ["usuarios", "{{UsuarioID}}"] }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": { "type": "text/javascript", "exec": ["pm.test(\"Mostrar Usuario 200\", ()=> pm.expect(pm.response.code).to.eql(200));"] }
+        }
+      ]
+    },
+    {
+      "name": "11) Actualizar Usuario",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Apenom\": \"Runner QA Edit\",\n  \"Correo\": \"runner-upd{{$timestamp}}@test.com\"\n}"
+        },
+        "url": { "raw": "{{base_url}}/usuarios/{{UsuarioID}}", "host": ["{{base_url}}"], "path": ["usuarios", "{{UsuarioID}}"] }
+      },
+      "response": [],
+      "event": [
+        { "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Actualizar Usuario 200\", ()=> pm.expect(pm.response.code).to.eql(200));"] } }
+      ]
+    },
+    {
+      "name": "12) Eliminar Ticket (último)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": { "raw": "{{base_url}}/tickets/{{TicketID}}", "host": ["{{base_url}}"], "path": ["tickets", "{{TicketID}}"] }
+      },
+      "response": [],
+      "event": [
+        { "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test(\"Eliminar Ticket 200\", ()=> pm.expect(pm.response.code).to.eql(200));"] } }
+      ]
+    }
+  ]
+}
