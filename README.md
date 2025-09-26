@@ -1,86 +1,99 @@
-# Ticketera – Backend (FastAPI + SQLAlchemy + SQL Server)
+# 📌 Ticketera – Backend (FastAPI + SQLAlchemy + SQL Server)
 
-Pequeña mesa de ayuda con tickets, técnicos, usuarios y comentarios.
+Pequeña **mesa de ayuda** con gestión de **tickets, técnicos, usuarios y comentarios**.  
+Incluye **pruebas automáticas con Postman/Newman** y **pruebas de carga con Locust**.  
 
-## Stack
+---
+
+## 🚀 Stack Tecnológico
 - Python 3.11+ (probado en Windows)
 - FastAPI 0.112
 - SQLAlchemy 2.x
 - Uvicorn
 - SQL Server (Driver ODBC 17)
 - pyodbc
+- Postman + Newman (pruebas funcionales)
+- Locust (pruebas de carga)
 
-## Requisitos
+---
+
+## ⚙️ Requisitos
 - **ODBC Driver 17 for SQL Server** instalado.
-- Python 3.11+
+- Python 3.11+  
 - Acceso a un SQL Server local (o remoto) con la BD `Ticketera` creada.
 
-## Instalación
-```powershell
-# 1) Crear y activar venv
-python -m venv .ticket
-.ticket\Scripts\activate
+---
 
-# 2) Instalar dependencias
-pip install -r requirements.txt
-```
+## 🔑 Variables de entorno
+Crear un archivo **.env** en la raíz:
 
-## Variables de entorno
-Crea un archivo **.env** en la raíz (o usa `.env.example` como base):
-```
+```env
 DATABASE_URL=mssql+pyodbc://localhost,1433/Ticketera?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes
-```
 
-> Si usas autenticación SQL (usuario/clave), el formato es:
-> `mssql+pyodbc://USUARIO:CLAVE@localhost,1433/Ticketera?driver=ODBC+Driver+17+for+SQL+Server`
+📚 Endpoints principales
+👤 Usuarios
 
-## Ejecutar el servidor
-```powershell
-uvicorn main:app --reload
-```
-Swagger: http://127.0.0.1:8000/docs
+POST /usuarios – Crea usuario
 
-## Endpoints principales
-- `POST  /usuarios` – Crea usuario
-- `PUT   /usuarios/{usuario_id}` – Actualiza usuario
-- `GET   /usuarios/{usuario_id}` – Detalle usuario
-- `DELETE /usuarios/{usuario_id}` – Elimina usuario
+PUT /usuarios/{usuario_id} – Actualiza usuario
 
-- `POST  /tecnicos` – Crea técnico
-- `GET   /tecnicos/{tecnico_id}` – Detalle técnico
-- `DELETE /tecnicos/{tecnico_id}` – Elimina técnico
-- `GET   /tecnicos/{tecnico_id}/tickets` – Tickets por técnico
+GET /usuarios/{usuario_id} – Detalle usuario
 
-- `POST  /tickets/` – Crea ticket (Estado siempre `Nuevo`)
-- `PUT   /tickets/` – Actualiza ticket (cambia estado, asigna técnico, etc.)
-- `GET   /tickets` – Lista con filtros y paginación (`estado`, `tecnico_id`, `page`, `size`)
-- `GET   /tickets/id/{ticket_id}` – Detalle ticket
-- `DELETE /tickets/{ticket_id}` – Elimina ticket (borra comentarios)
-- `GET   /tickets/estadisticas` – Conteos por estado
+DELETE /usuarios/{usuario_id} – Elimina usuario
 
-- `POST  /tickets/{ticket_id}/comentarios` – Agrega comentario
-- `GET   /tickets/{ticket_id}/comentarios` – Lista comentarios
+👨‍🔧 Técnicos
 
-### Parámetros útiles en `GET /tickets`
-- `estado` ∈ {"Nuevo","Abierto","En Progreso","Cerrado"}
-- `tecnico_id` (int ≥ 1)
-- `page` (int ≥ 1), `size` (1..100)
-- Header de respuesta: **X-Total-Count** con el total de registros (sin paginar).
+POST /tecnicos – Crea técnico
 
-## Script de datos demo
-Ejecuta este archivo en SQL Server para poblar datos iniciales:  
-**sql_seed_demo.sql**
+GET /tecnicos/{tecnico_id} – Detalle técnico
 
-## Constraint y FK (recomendado)
-Ejecuta este archivo para:
-- Hacer único el correo de usuarios
-- Asegurar `ON DELETE CASCADE` en comentarios  
-**sql_constraints.sql**
+DELETE /tecnicos/{tecnico_id} – Elimina técnico
 
-## Troubleshooting
-- **Swagger no carga /openapi.json**: revisa que no haya parámetros default raros (p. ej., `Response=None` en firmas de rutas). Reinicia `uvicorn`.
-- **WatchFiles recarga por cambios en venv**: corre sin `--reload-dir` extra. Si molesta, usa `--reload-exclude .ticket/*` desde un `.bat`.
-- **pyodbc falla al instalar**: verifica **ODBC Driver 17**. Si usas Python 3.13 y da problemas, considera Python 3.11/3.12.
+GET /tecnicos/{tecnico_id}/tickets – Tickets por técnico
 
-## Licencia
-Uso educativo/demostrativo.
+🎫 Tickets
+
+POST /tickets/ – Crea ticket (Estado inicial: Nuevo)
+
+PUT /tickets/ – Actualiza ticket (cambia estado, asigna técnico, etc.)
+
+GET /tickets – Lista con filtros y paginación (estado, tecnico_id, page, size)
+
+GET /tickets/id/{ticket_id} – Detalle ticket
+
+DELETE /tickets/{ticket_id} – Elimina ticket (borra comentarios asociados)
+
+GET /tickets/estadisticas – Conteos por estado
+
+💬 Comentarios
+
+POST /tickets/{ticket_id}/comentarios – Agrega comentario
+
+GET /tickets/{ticket_id}/comentarios – Lista comentarios
+
+
+📊 Pruebas con Postman & Newman
+📂 Archivos incluidos
+
+mesa_de_ayuda_API_v2.postman_collection.json
+
+localhost.postman_environment.json
+
+
+👉 Evidencias:
+
+✅ Todos los tests pasaron sin errores (0 failed).
+
+📄 Reporte generado: reporte.postman.html
+
+👉 Evidencias:
+
+📄 Reportes CSV en reports/
+
+📊 Dashboard web con métricas:
+
+RPS (requests per second)
+
+Tiempo de respuesta (p50, p95)
+
+Fallos (0% en pruebas exitosas)
