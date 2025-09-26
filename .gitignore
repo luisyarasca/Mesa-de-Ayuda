@@ -1,29 +1,35 @@
-# Python
+# Entornos virtuales
+.ticket/
+venv/
+env/
+
+# Archivos de Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.venv/
-venv/
+*.sqlite3
+
+# Reportes y logs
+*.csv
+*.xml
+*.html
+*.coverage
+.coverage*
+coverage/
+report*.xml
+reporte.postman.html
+
+# Configs locales
 .env
 .env.*
+*.db
 
-# FastAPI / tests
-.pytest_cache/
-.coverage
-
-# Node / Vite / Vue
-frontend/node_modules/
-frontend/.vite/
-frontend/dist/
-frontend/.env
-frontend/.env.*
-
-# IDE / SO
-.vscode/
-.idea/
+# Archivos de sistema
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# Otros temporales del proyecto
-.ticket/
+# Carpeta de VSCode/PyCharm
+.vscode/
+.idea/
